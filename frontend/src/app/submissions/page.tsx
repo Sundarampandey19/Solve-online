@@ -2,6 +2,8 @@ import React from 'react';
 import ListSub from './listSub';
 import getSubmissions from './action'; 
 import { cookies } from "next/dist/client/components/headers";
+import { Metadata } from 'next';
+import { redirect } from 'next/navigation';
 
 export interface Submission {
     id: number;
@@ -13,6 +15,11 @@ export interface Submission {
     username: string;
 }
 
+export const metadata: Metadata = {
+    title: "Submissions",
+    description: "Submissions by the user",
+  };
+
 const SubmissionsPage: React.FC = async () => {
     const username = cookies().get("username")?.value
     let submissions :Submission[] = [] 
@@ -20,7 +27,7 @@ const SubmissionsPage: React.FC = async () => {
          submissions = await getSubmissions(username)
 
     }else{
-         submissions = await getSubmissions("sam")
+         redirect('/')
         
     }
 

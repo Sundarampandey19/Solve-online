@@ -3,6 +3,13 @@ import React, { ChangeEvent, useState } from "react";
 import createSubmission from "./action";
 import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Write Your Code",
+  description: "The Ide where You write your code",
+};
+
 
 let language = "";
 const handleSubmit = async (formdata: FormData) => {
