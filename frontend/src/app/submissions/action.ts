@@ -1,3 +1,4 @@
+import { env } from "@/lib/env";
 import axios from "axios";
 
 export default async function getSubmissions(username: string) {     
@@ -6,7 +7,7 @@ export default async function getSubmissions(username: string) {
         if (!username) {
             return;
         }
-        const response = await axios.get('http://localhost:3000/submit', {
+        const response = await axios.get( env.SERVER_URL +'submit', {
             params: {
                 username: username
             }

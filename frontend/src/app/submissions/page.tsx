@@ -15,7 +15,6 @@ export interface Submission {
 
 const SubmissionsPage: React.FC = async () => {
     const username = cookies().get("username")?.value
-    // console.log(username)
     let submissions :Submission[] = [] 
     if(username){
          submissions = await getSubmissions(username)

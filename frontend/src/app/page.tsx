@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { env } from "@/lib/env";
 import axios from "axios";
 import { cookies } from 'next/headers'
 import { redirect} from "next/navigation";
@@ -17,15 +18,20 @@ export default function Home() {
     console.log(username)
     try{
       // console.log(username)
-      const response = await axios.post("http://localhost:3000/", {
+      const response = await axios.post(env.SERVER_URL, {
         username: username
       } );
       console.log(response.data)
     }catch(e){
       console.log("Error while setting user",e)
     }
-
-    cookies().set("username",username)
+    
+    if (cookies().get("username") === null) {
+      cookies().set("username", username);
+    } else {
+      cookies().delete('username')
+      cookies().set("username", username);
+    }
     
     redirect('/ide')
   }

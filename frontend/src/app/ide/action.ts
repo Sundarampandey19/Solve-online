@@ -1,4 +1,5 @@
 "use server"
+import { env } from "@/lib/env";
 import axios from "axios";
 import { revalidatePath } from "next/cache";
 import { cookies } from "next/dist/client/components/headers";
@@ -27,8 +28,8 @@ export default async function createSubmission({
             stdin,
             code: sourceCode,
           };
-
-      const response = await axios.post("http://localhost:3000/submit", requestBody);
+          
+      const response = await axios.post( env.SERVER_URL + "submit", requestBody);
       revalidatePath("/submissions");
       return response.data;
       
